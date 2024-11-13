@@ -9,6 +9,7 @@ describe("memorandum", () => {
   const program = anchor.workspace.Memorandum as Program<Memorandum>;
 
   it("Is initialized!", async () => {
+    const memo =  new anchor.web3.Keypair();
     // Add your test here.
     const tx = await program.methods.initialize().rpc();
     console.log("Your transaction signature", tx);
