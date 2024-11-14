@@ -1,10 +1,5 @@
 use anchor_lang::prelude::*;
 
-declare_id!("AKyYdWGzNdMZ5cwYBbxbS7mJbQApZRji6wgoidGLqRGK");
-
-pub mod memorandum;
-pub mod counter;
-
 #[program]
 pub mod memorandum {
     use super::*;
@@ -17,31 +12,27 @@ pub mod memorandum {
     }
 }
 
-#[derive(Accounts)] // primitives and instruction 
-#[instruction(text: String)] // params or args
+#[derive(Accounts)]
+#[instruction(text: String)]
 pub struct Initialize<'info> {
     #[account(
         init,
         payer = signer,
         space = 8 + 32 + calc_size(&text)
     )]
-    pub memorandum: Account<'info, Memorandum >,
+    pub memorandum: Account<'info, Memorandum>,
     #[account(mut)]
     pub signer: Signer<'info>,
     pub system_program: Program<'info, System>,
 }
 
-fn calc_size(str: String) {
-    let len = str.len();
-    let mut size = 0;
-    for c in str.chars() {
-        size += c.len_utf8();
-    }
-    size
+fn calc_size(text: &String) -> usize {
+    let len = text.len();
+    len // Puedes simplificar usando solo `len`, ya que `String` calcula el tamaño en bytes.
 }
 
-#[account] // Serialization, Deserialization
-struct Memorandum {
-    pub text: <String> // 200 characters
-    pub owner: Pubkey // commonly pubkeys are 32 bytes
+#[account]
+pub struct Memorandum {
+    pub text: String,
+    pub owner: Pubkey,
 }
