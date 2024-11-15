@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-memorandum = "AKyYdWGzNdMZ5cwYBbxbS7mJbQApZRji6wgoidGLqRGK"
+my_anchor_program = "AKyYdWGzNdMZ5cwYBbxbS7mJbQApZRji6wgoidGLqRGK"
 
 [registry]
 url = "https://api.apr.dev"
